@@ -1,7 +1,7 @@
 {
   "name": "postcss-selector-property",
   "description": "get CSS properties using selectors",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "author": "Michael Andrew Vanasse <mail@mndvns.com>",
   "license": "MIT",
