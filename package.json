@@ -8,10 +8,11 @@
   "scripts": {
     "watch": "run-p -l *:watch",
     "test": "mocha --watch-extensions js,css --bail",
-    "test:watch": "yarn run test --watch",
+    "test:watch": "yarn test --watch",
     "build": "babel src/index.js --out-dir lib",
-    "build:watch": "yarn run build --watch",
-    "clear": "rm -rf node_modules package-* *.log *.lock"
+    "build:watch": "yarn build --watch",
+    "clear": "rm -rf node_modules package-* *.log *.lock",
+    "prepublishOnly": "yarn build"
   },
   "keywords": [
     "postcss",

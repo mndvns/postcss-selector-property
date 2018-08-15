@@ -2,6 +2,18 @@
 
 Find and use CSS properties with selectors.
 
+## Usage
+
+Install with `npm` or `yarn`.
+
+```shell
+npm install postcss-selector-property --save-dev
+```
+
+```shell
+yarn add postcss-selector-property -D
+```
+
 ## Examples
 
 From `/test/index.js`.
