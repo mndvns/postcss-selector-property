@@ -2,7 +2,15 @@
 
 Find and use CSS properties with selectors.
 
-## Usage
+## Summary
+
+Use `ref(selector, property, fallback?)` in your properties
+to retrieve the value for `property` that exists at `selector`, with
+and optional `fallback`.
+
+See examples below for details.
+
+## Install
 
 Install with `npm` or `yarn`.
 
