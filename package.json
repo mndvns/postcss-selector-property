@@ -1,0 +1,33 @@
+{
+  "name": "postcss-selector-property",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Michael Andrew Vanasse <mail@mndvns.com>",
+  "license": "MIT",
+  "scripts": {
+    "watch": "run-p -l *:watch",
+    "test": "mocha --watch-extensions js,css --bail",
+    "test:watch": "yarn run test --watch",
+    "build": "babel src/index.js --out-dir lib",
+    "build:watch": "yarn run build --watch",
+    "clear": "rm -rf node_modules package-* *.log *.lock"
+  },
+  "keywords": [
+    "postcss",
+    "selector",
+    "property",
+    "parser",
+    "css"
+  ],
+  "peerDependencies": {
+    "postcss": "^7.0.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-rc.1",
+    "@babel/core": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.3",
+    "should": "^13.2.3"
+  }
+}
