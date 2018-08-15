@@ -46,12 +46,12 @@ describe('postcss-selector-property', () => {
   it('should work with pseudo selectors', () => {
     should.equal(transform(`
 .a { color: blue }
-.a:hover { background: darkblue }
-.a:active { background: ref(.a:hover, background) }
+.a:hover:not(:first-child) { background: darkblue }
+.z { background: ref(.a:hover:not(:first-child), background) }
     `.trim()).css, `
 .a { color: blue }
-.a:hover { background: darkblue }
-.a:active { background: darkblue }
+.a:hover:not(:first-child) { background: darkblue }
+.z { background: darkblue }
     `.trim())
   })
 
