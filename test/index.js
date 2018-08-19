@@ -98,4 +98,18 @@ describe('postcss-selector-property', () => {
 .m { color: #f00 }
     `.trim())
   })
+
+  it('should work within declaration functions', () => {
+    should.equal(transform(`
+.a { color: blue }
+.b { color: var(--bbb, ref(.a, color)) }
+.c { color: var(--ccc, ref(.b, color, orange)) }
+.d { color: var(--ddd, ref(.z, color, purple)) }
+    `.trim()).css, `
+.a { color: blue }
+.b { color: var(--bbb, blue) }
+.c { color: var(--ccc, var(--bbb, blue)) }
+.d { color: var(--ddd, purple) }
+    `.trim())
+  })
 })

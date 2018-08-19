@@ -14,8 +14,11 @@ export default postcss.plugin('postcss-selector-property', (opts = {}) => {
     // find reference decls that use
     // the `ref(...)` syntax
     css.walkDecls(decl => {
-      const match = /ref\(([^,]*),([^\),]*)(,([^\)]*))?\)/g.exec(decl.value)
+      const dvalue = decl.value
+      const match = /ref\(([^,]*),([^\),]*)(,([^\)]*))?\)/g.exec(dvalue)
       if (match) {
+        const before = dvalue.slice(0, match.index)
+        const after = dvalue.slice(before.length + match[0].length)
         const dsel = match[1].trim().replace(/&/g, decl.parent.selector)
         const dprop = match[2].trim()
         const dfallback = match[4] ? match[4].trim() : null
@@ -34,6 +37,10 @@ export default postcss.plugin('postcss-selector-property', (opts = {}) => {
             value: dfallback
           })
         }
+
+        decl.before = before
+        decl.after = after
+        decl.value = match[0]
 
         // push the reference decls
         // onto a list, to be updated
@@ -131,12 +138,10 @@ export default postcss.plugin('postcss-selector-property', (opts = {}) => {
     // we need to update their values
     if (resolved.length) {
       for (const { dsel, dprop, ddecls, rdecl } of resolved) {
-        // console.log('resolved', dsel, dprop, ddecls, rdecl)
-
         // iterate over reference decls to update
         for (const ddecl of ddecls) {
           // assign the rule's decl value to each reference
-          ddecl.value = rdecl.value
+          ddecl.value = ddecl.before + rdecl.value + ddecl.after
         }
 
         // remove fallback if we found
@@ -152,7 +157,7 @@ export default postcss.plugin('postcss-selector-property', (opts = {}) => {
       for (const [ddecls, rvalue] of fallbacks.entries()) {
         for (const ddecl of ddecls) {
           // assign each decl's value to the fallback value
-          ddecl.value = rvalue
+          ddecl.value = ddecl.before + rvalue + ddecl.after
         }
       }
     }
